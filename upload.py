@@ -1,13 +1,50 @@
+#!C:\xampp\htdocs\venv\Scripts\python.exe
+print('Content-Type: text/html\n')
+print(
+    "<head>"
+    "<link rel='stylesheet' type='text/css' href='css/normalize.css'/>"
+    "<link rel='stylesheet' type='text/css' "
+    "href='css/demo.css'/><link rel='stylesheet' type='text/css' href='css/component.css'/>"
+    "<link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>"
+    "</head>")
+import os
+import cgi
+import cgitb
 import xlrd
+
+cgitb.enable()
+form = cgi.FieldStorage()
+# fileitem = form['fileToUpload']
+# fileitem2 = form['fileToUpload2']
+# if fileitem.filename and fileitem2.filename:
+#     # strip leading path from file name to avoid
+#     # directory traversal attacks
+#     fn = os.path.basename(fileitem.filename)
+#     fn2 = os.path.basename(fileitem2.filename)
+#
+#     dest_dir = 'uploads/'
+#     open(dest_dir + fn, 'wb').write(fileitem.file.read())
+#     open(dest_dir + fn2, 'wb').write(fileitem2.file.read())
+#
+#     os.rename(dest_dir + fn, dest_dir + 'App-File.xlsx')
+#     os.rename(dest_dir + fn2, dest_dir + 'Part-File.xlsx')
+#
+#
+#     message = 'The files '' + fn + '' and '' + fn2 + '' were uploaded successfully!'
+#
+# else:
+#     message = 'No files were uploaded'
+#
+# print(message, '<br>')
 
 ############ DEFINE VARIABLES FOR EXCEL ###################
 # use xlrd to open excel file
-part_workbook = xlrd.open_workbook("AggieSource - Participation.xlsx")
+part_workbook = xlrd.open_workbook('uploads/Part-File.xlsx')
 # define what part_worksheet to use
 part_worksheet = part_workbook.sheet_by_index(0)
 # use xlrd to open excel file
-# app_workbook = xlrd.open_workbook("AggieSource - Applications.xlsx")
-app_workbook = xlrd.open_workbook("File.xlsx")
+# app_workbook = xlrd.open_workbook('AggieSource - Applications.xlsx')
+app_workbook = xlrd.open_workbook('uploads/App-File.xlsx')
 
 # define what part_worksheet to use
 app_worksheet = app_workbook.sheet_by_index(0)
@@ -49,16 +86,17 @@ for key, value in address_dict.items():
     rev_address_workbook.setdefault(value, set()).add(key)
 rev_address_dict = [key for key, values in rev_address_workbook.items() if len(values) > 1]
 
-
 ############ CALCULATIONS ###################
 # calculations to determine duplicates
 duplicates = len(rev_part_dict)
-total_part = part_worksheet.nrows - 1
+total_part = len(part_dict)
 ind_part = len(rev_part_workbook)
 ind_hh = len(rev_address_workbook)
 
 # print results
-print("There are", ind_hh, "individual households.")
-print("There are", total_part, "total participants.")
-print("There are", ind_part, "unique individuals.")
-
+print("<div class='topnav'><a href='/Harvest-X/'>Home</a></div>")
+print('<div align=''center>')
+print('There are', ind_hh, 'individual households.\n', '<br>')
+print('There are', total_part, 'total participants.\n', '<br>')
+print('There are', ind_part, 'unique individuals.\n', '<br>')
+print('</div>')
