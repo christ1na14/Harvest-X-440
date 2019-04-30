@@ -2,40 +2,57 @@
 print('Content-Type: text/html\n')
 print(
     "<head>"
+    "<title>Harvest X</title>"
+    "<link rel='shortcut icon' href='favicon.ico'>"
     "<link rel='stylesheet' type='text/css' href='css/normalize.css'/>"
     "<link rel='stylesheet' type='text/css' "
     "href='css/demo.css'/><link rel='stylesheet' type='text/css' href='css/component.css'/>"
     "<link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>"
+    "<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' "
+    "integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'> "
     "</head>")
 import os
 import cgi
 import cgitb
 import xlrd
+import shutil
 
 cgitb.enable()
 form = cgi.FieldStorage()
-# fileitem = form['fileToUpload']
-# fileitem2 = form['fileToUpload2']
-# if fileitem.filename and fileitem2.filename:
-#     # strip leading path from file name to avoid
-#     # directory traversal attacks
-#     fn = os.path.basename(fileitem.filename)
-#     fn2 = os.path.basename(fileitem2.filename)
-#
-#     dest_dir = 'uploads/'
-#     open(dest_dir + fn, 'wb').write(fileitem.file.read())
-#     open(dest_dir + fn2, 'wb').write(fileitem2.file.read())
-#
-#     os.rename(dest_dir + fn, dest_dir + 'App-File.xlsx')
-#     os.rename(dest_dir + fn2, dest_dir + 'Part-File.xlsx')
-#
-#
-#     message = 'The files '' + fn + '' and '' + fn2 + '' were uploaded successfully!'
-#
-# else:
-#     message = 'No files were uploaded'
-#
-# print(message, '<br>')
+# gets files from submitted form
+fileitem = form['fileToUpload']
+fileitem2 = form['fileToUpload2']
+
+# checks to see if there are files there
+if fileitem.filename and fileitem2.filename:
+    # strip leading path from file name to avoid
+    # directory traversal attacks
+    fn = os.path.basename(fileitem.filename)
+    fn2 = os.path.basename(fileitem2.filename)
+
+    dest_dir = 'uploads/'
+    # deletes contents of uploads folder before processing new files
+    folder = 'uploads/'
+    for the_file in os.listdir(folder):
+        file_path = os.path.join(folder, the_file)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+            # elif os.path.isdir(file_path): shutil.rmtree(file_path)
+        except Exception as e:
+            print(e)
+    # writes file to directory
+    open(dest_dir + fn, 'wb').write(fileitem.file.read())
+    open(dest_dir + fn2, 'wb').write(fileitem2.file.read())
+
+    # renames files
+    os.rename(dest_dir + fn, dest_dir + 'App-File.xlsx')
+    os.rename(dest_dir + fn2, dest_dir + 'Part-File.xlsx')
+
+    message = "The files '" + fn + '" "' and '" "' + fn2 + "' were uploaded successfully!"
+
+else:
+    message = 'No files were uploaded'
 
 ############ DEFINE VARIABLES FOR EXCEL ###################
 # use xlrd to open excel file
@@ -96,7 +113,8 @@ ind_hh = len(rev_address_workbook)
 # print results
 print("<div class='topnav'><a href='/Harvest-X/'>Home</a></div>")
 print('<div align=''center>')
-print('There are', ind_hh, 'individual households.\n', '<br>')
-print('There are', total_part, 'total participants.\n', '<br>')
-print('There are', ind_part, 'unique individuals.\n', '<br>')
+print("<br>")
+print('<h2>Individual Households:<small class="text-muted">', ind_hh, '</small></h2><br>')
+print('<h2>Total Participants:<small class="text-muted">', total_part, '</small></h2><br>')
+print('<h2>Unique Individuals:<small class="text-muted">', ind_part, '</small></h2><br>')
 print('</div>')
