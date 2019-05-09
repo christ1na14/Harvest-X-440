@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="62fa47aa-ff48-48fd-b358-e083c5157428" name="Default Changelist" comment="added unique household functio">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AggieSource - Applications.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AggieSource - Participation.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/upload.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/App-File.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/Part-File.xlsx" beforeDir="false" />
-    </list>
+    <list default="true" id="62fa47aa-ff48-48fd-b358-e083c5157428" name="Default Changelist" comment="added unique household functio" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +190,7 @@
       <workItem from="1556836927741" duration="4580000" />
       <workItem from="1557194038058" duration="6610000" />
       <workItem from="1557238766215" duration="596000" />
-      <workItem from="1557358725333" duration="5775000" />
+      <workItem from="1557358725333" duration="6374000" />
     </task>
     <task id="LOCAL-00001" summary="added comments">
       <created>1556295260560</created>
@@ -210,10 +203,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62318000" />
+    <option name="totallyTimeSpent" value="62917000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
+    <frame x="-7" y="-7" width="1295" height="735" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15060729" />
